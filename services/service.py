@@ -15,6 +15,8 @@ def get_all_words_from_traversed_wikipedia(article, depth):
         if not article_soup:
             continue
         text = article_soup.get_text()
+        if "Wikipedia does not have an article with this exact name" in text:
+            continue
         words.extend(clean_text(text))
         for link in extract_links(article_soup):
             if link not in visited:
