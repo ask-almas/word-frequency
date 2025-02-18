@@ -1,5 +1,5 @@
-from scraper import fetch_wikipedia_page, extract_links
-from text_processing import clean_text
+from .scraper import fetch_wikipedia_page, extract_links
+from .text_processing import clean_text
 
 
 def get_all_words_from_traversed_wikipedia(article, depth):
