@@ -87,8 +87,8 @@ def word_frequency():
     if validation_error:
         return jsonify(validation_error[0]), validation_error[1]
 
-    article = request.args.get("article")
-    depth = int(request.args.get("depth"))
+    article = request.args.get(PARAM_ARTICLE)
+    depth = int(request.args.get(PARAM_DEPTH))
     words = get_all_words_from_traversed_wikipedia(article, depth)
     filtered_frequencies = calculate_word_frequencies(words)
     return jsonify(filtered_frequencies)
@@ -102,16 +102,16 @@ def keywords():
     if validation_error:
         return jsonify(validation_error[0]), validation_error[1]
 
-    article = data.get("article")
-    depth = int(data.get("depth"))
-    ignore_list = set(data.get("ignore_list"))
-    percentile = int(data.get("percentile"))
+    article = data.get(PARAM_ARTICLE)
+    depth = int(data.get(PARAM_DEPTH))
+    ignore_list = set(data.get(PARAM_IGNORE_LIST))
+    percentile = int(data.get(PARAM_PERCENTILE))
 
     words = get_all_words_from_traversed_wikipedia(article, depth)
     word_frequencies = calculate_word_frequencies(words)
-    filtered_frequencies = filter_word_frequencies(word_frequencies, ignore_list, percentile)
+    filtered_word_frequencies = filter_word_frequencies(word_frequencies, ignore_list, percentile)
 
-    return jsonify(filtered_frequencies)
+    return jsonify(filtered_word_frequencies)
 
 
 if __name__ == "__main__":
